@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { MovieCard } from './components/MovieCard';
 import { SideBar } from './components/SideBar';
-// import { Content } from './components/Content';
+import { Content } from './components/Content';
 
 import { api } from './services/api';
 
 import './styles/global.scss';
-import './styles/content.scss';
 
 interface GenreResponseProps {
   id: number;
@@ -58,19 +56,7 @@ export function App() {
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       <SideBar movieGenres={genres} handleClickButton={handleClickButton} selectedGenreId={selectedGenreId} />
 
-      <div className="container">
-        <header>
-          <span className="category">Categoria:<span> {selectedGenre.title}</span></span>
-        </header>
-
-        <main>
-          <div className="movies-list">
-            {movies.map(movie => (
-              <MovieCard key={movie.imdbID} title={movie.Title} poster={movie.Poster} runtime={movie.Runtime} rating={movie.Ratings[0].Value} />
-            ))}
-          </div>
-        </main>
-      </div>
+      <Content movies={movies} selectedGenre={selectedGenre}/>
     </div>
   )
 }
